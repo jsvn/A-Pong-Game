@@ -2,16 +2,26 @@ const radius = 5;
 
 export default class Ball {
 	// Ball Properties
-	constructor(height, width){
-		this.x = width/2;
-		this.y = height/2;
-		this.vy = Math.floor(Math.random() * 12 - 6);
-		this.vx = (7 - Math.abs(this.vy));
+	constructor(height, width, controls, goalCallBack){
+		this.x = width/2; // sets starting x position
+		this.y = height/2; //sets starting y position
+		this.vy = 0;//Math.floor(Math.random() * 12 - 6);
+		this.vx = 0;//(7 - Math.abs(this.vy));
 		this.maxHeight = height;
 		this.height = height;
 		this.width = width;
 		// this.speed = speed;
 		this.radius = radius;
+		this.goalCallBack = goalCallBack;
+		document.addEventListener('keydown', event => {
+			switch(event.keyCode) {
+				case controls.start:
+					this.vy = Math.floor(Math.random() * 12 - 6);
+					this.vx = (7 - Math.abs(this.vy));
+					console.log('start');
+					break;
+			}
+		});	
 	}
 	//Ball Methods
 	draw(ctx){
@@ -21,19 +31,15 @@ export default class Ball {
 		ctx.fill();
 	}
 	//creating the bounce effect
-	wallBounce(ctx){
-		const hitLeft = this.x >= this.width;
-		const hitRight = this.x + this.radius <= 0;
-		const hitTop = this.y + this.radius <= 0;
-		const hitBottom = this.y >= this.height;
-
-		if (hitLeft || hitRight){
-			this.vx = -this.vx;
-		} else if (hitTop || hitBottom){
+	wallBounce(){
+		const hitTop = this.y + this.radius < 5;
+		const hitBottom = this.y >= this.height - 5;
+		
+		if (hitTop || hitBottom){
 			this.vy = -this.vy;
 		}
 	}
-
+	
 	paddleCollision(player1, player2) {
          if (this.vx > 0) {
              const inRightEnd = 
@@ -51,32 +57,44 @@ export default class Ball {
                  }
              }
          } else {
-             const inLeftEnd = player1.x + (player1.width*2) >= this.x;
+             const inLeftEnd = player1.x + player1.width >= this.x;
              if (inLeftEnd) {
-                 const collisionDiff = player1.x + player1.width - this.x;
+                 const collisionDiff = player1.x + player1.width + this.radius;
                  const k = collisionDiff / -this.vx;
                  const y = this.vy * k + (this.y - this.vy);
                  const hitLeftPaddle = y >= player1.y && y + this.radius <=
                  player1.y + player1.height;
                  if (hitLeftPaddle) {
                      this.x = player1.x + player1.width;
-                     this.y = Math.floor(this.y - this.vy + this.vy * k) + 1;
+                     this.y = Math.floor(this.y - this.vy + this.vy * k);
                      this.vx = -this.vx;
                  }
              }
          }
      } //Paddle Collision brackets
+  	goal(){
+		const outRight = this.x >= this.width;
+		const outLeft = this.x + this.radius <= 0;
 
-render(ctx, player1, player2) {
-		this.x += this.vx;// Math.max(radius, this.vx);
-		this.y += this.vy; //Math.min(this.maxHeight - radius, this.vy);
-		this.draw(ctx);
-		this.wallBounce(ctx);
-		this.paddleCollision(player1, player2);
-		
-
-		//In the render method we will need to call this.wallBounce 
-		//so it will redraw the movement
-
+		if (outRight){
+			this.goalCallBack();
+			this.reset();
+		}else if(outLeft){
+			console.log(this.goalCallBack);
+			this.reset();
+		}
 	}
+    reset(){
+    	this.x = this.width/2;
+		this.y = this.height/2;
+    }
+	render(ctx, player1, player2){
+			this.x += this.vx;// this rendering keeps the ball moving!
+			this.y += this.vy;
+			this.draw(ctx);
+			this.wallBounce();
+			this.paddleCollision(player1, player2);
+			this.goal(this.width, this.height);//, player1, player2);
+			
+		}
 }

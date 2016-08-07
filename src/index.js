@@ -3,7 +3,7 @@ import Game from './Game';
 
 
 
-var game = new Game();
+const game = new Game();
 
 const fps = 30;
 
