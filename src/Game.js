@@ -24,12 +24,9 @@ const playPause = {start: 32, pause: 32};
 		this.board = new Board(this.width, this.height);
 		this.player1 = new Paddle(this.height, gap, p1Keys);  //{up: a, down: z,}
 		this.player2 = new Paddle(this.height, this.width - 5 - gap, p2Keys);
-		this.ball1 = new Ball(this.height, this.width, playPause, this.goalCount);
+		this.ball1 = new Ball(this.height, this.width, playPause, this);
 		this.leftScore = new ScoreBoard(this.width/4 + 20,  30, 0);
 		this.rightScore = new ScoreBoard(this.width/4 + 120, 30, 0);
-	}
-	goalCount(){
-		console.log('Gekk0');
 	}
    render(){
    	this.board.render(this.ctx);
