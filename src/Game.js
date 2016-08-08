@@ -9,7 +9,7 @@ const gap = 10;
 // objects made to set the up and down values to be used by the keydown switch statement
 const p1Keys = {up: 65, down: 90};
 const p2Keys = {up: 38, down: 40};
-const playPause = {start: 32, pause: 32};
+const start = {start: 32, pause: 32};
 
 
  export default class Game {
@@ -24,7 +24,7 @@ const playPause = {start: 32, pause: 32};
 		this.board = new Board(this.width, this.height);
 		this.player1 = new Paddle(this.height, gap, p1Keys);  //{up: a, down: z,}
 		this.player2 = new Paddle(this.height, this.width - 5 - gap, p2Keys);
-		this.ball1 = new Ball(this.height, this.width, playPause, this);
+		this.ball1 = new Ball(this.height, this.width, start, this);
 		this.leftScore = new ScoreBoard(this.width/4 + 20,  30, 0);
 		this.rightScore = new ScoreBoard(this.width/4 + 120, 30, 0);
 	}

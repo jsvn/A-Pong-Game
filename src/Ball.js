@@ -29,8 +29,14 @@ export default class Ball {
 	startListener(controls){
 		document.addEventListener('keydown', event => {
 			if (this.vx === 0 && this.vy === 0 && event.keyCode === controls.start){
-				this.vy = Math.floor(Math.random() * 12 - 6);
-				this.vx = (7 - Math.abs(this.vy));
+				const generateSpeed = () => {
+					this.vy = Math.floor(Math.random() * 8 - 4);
+					this.vx = Math.floor(Math.random() * 8 - 4);	
+					if (this.vx === 0 || this.vy === 0 ) {
+						generateSpeed();
+					}
+				}
+				generateSpeed();
 			}
 		});
 	}
@@ -65,7 +71,7 @@ export default class Ball {
 		} else {
 			const inLeftEnd = player1.x + player1.width >= this.x;
 			if (inLeftEnd) {
-				const collisionDiff = player1.x + player1.width + this.radius;
+				const collisionDiff = player1.x + player1.width - this.x;
 				const k = collisionDiff / -this.vx;
 				const y = this.vy * k + (this.y - this.vy);
 				const hitLeftPaddle = y >= player1.y && y + this.radius <=
