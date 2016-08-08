@@ -7,7 +7,7 @@ export default class Paddle {
 		this.width = 5;
 		this.x = x;
 		this.y = (height / 2) - (this.height / 2);
-		this.speed = 5;
+		this.speed = 10;
 	//this property listens for the keydown event, controls calls the controll argument 
 	//which is set by passing an object through it with up & down being a key for that object
 		document.addEventListener('keydown', event => {

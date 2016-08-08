@@ -4,12 +4,7 @@ import Paddle from './Paddle';
 import Board from './Board';
 import Ball from './Ball';
 import ScoreBoard from './ScoreBoard';
-// this is used for the x value of the paddles
-const gap = 10;
-// objects made to set the up and down values to be used by the keydown switch statement
-const p1Keys = {up: 65, down: 90};
-const p2Keys = {up: 38, down: 40};
-const start = {start: 32, pause: 32};
+import { gap, p1Keys, p2Keys, start} from './Settings';
 
 
  export default class Game {
