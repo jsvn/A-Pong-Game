@@ -1,0 +1,7 @@
+ #game {
+   background-color: black;
+   display: block;
+   height: 256px;
+   margin: 20px auto;
+   width: 512px;
+}

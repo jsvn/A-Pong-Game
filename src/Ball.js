@@ -5,8 +5,8 @@ export default class Ball {
 	constructor(height, width, controls, game){
 		this.x = width/2; // sets starting x position
 		this.y = height/2; //sets starting y position
-		this.vy = 0;//Math.floor(Math.random() * 12 - 6);
-		this.vx = 0;//(7 - Math.abs(this.vy));
+		this.vy = 0;
+		this.vx = 0;
 		this.maxHeight = height;
 		this.height = height;
 		this.width = width;
