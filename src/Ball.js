@@ -10,11 +10,13 @@ export default class Ball {
 		this.maxHeight = height;
 		this.height = height;
 		this.width = width;
-		this.controls = controls;
 		// this.speed = speed;
 		this.radius = radius;
 		this.game = game;
-		this.startListener(controls);	
+		this.startListener(controls);
+		this.ballBounceSound = new Audio('../sounds/pong-01.wav');	
+		this.ballPCSound = new Audio('../sounds/pong-02.wav');	
+		this.ballGoalSound = new Audio('../sounds/pong-03.wav');	
 	}
 	//Ball Methods
 	draw(ctx){
@@ -23,21 +25,14 @@ export default class Ball {
 		ctx.fillStyle = "white";
 		ctx.fill();
 	}
+	
 	startListener(controls){
-		document.addEventListener('keydown', this.eventListener);
-	}
-	eventListener(event){
-		switch(event.keyCode) {
-				case this.controls.start:
+		document.addEventListener('keydown', event => {
+			if (this.vx === 0 && this.vy === 0 && event.keyCode === controls.start){
 				this.vy = Math.floor(Math.random() * 12 - 6);
 				this.vx = (7 - Math.abs(this.vy));
-				console.log('start');
-				this.endListener();
-				break;
 			}
-	}
-	endListener(){
-		document.removeEventListener('keydown', this.eventListener);
+		});
 	}
 	//creating the bounce effect
 	wallBounce(){
@@ -46,6 +41,7 @@ export default class Ball {
 		
 		if (hitTop || hitBottom){
 			this.vy = -this.vy;
+			this.ballBounceSound.play();
 		}
 	}
 	
@@ -63,6 +59,7 @@ export default class Ball {
 					this.x = player2.x - this.radius;
 					this.y = Math.floor(this.y - this.vy + this.vy * k);
 					this.vx = -this.vx;
+					this.ballPCSound.play();
 				}
 			}
 		} else {
@@ -77,6 +74,7 @@ export default class Ball {
 					this.x = player1.x + player1.width;
 					this.y = Math.floor(this.y - this.vy + this.vy * k);
 					this.vx = -this.vx;
+					this.ballPCSound.play();
 				}
 			}
 		}
@@ -98,6 +96,7 @@ export default class Ball {
      	this.y = this.height/2;
      	this.vx = 0;
      	this.vy = 0;
+     	this.ballGoalSound.play();
      }
      render(ctx, player1, player2){
 			this.x += this.vx;// this rendering keeps the ball moving!

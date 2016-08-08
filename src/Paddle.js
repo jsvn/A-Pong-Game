@@ -2,12 +2,12 @@
 export default class Paddle {
 	// Paddle properties defines it's width, height, the max height it can go too, a speed, and positioning
 	constructor(height, x, controls){
-		this.height = 80;
+		this.height = 40;
 		this.maxHeight = height;
 		this.width = 5;
 		this.x = x;
 		this.y = (height / 2) - (this.height / 2);
-		this.speed = 10;
+		this.speed = 5;
 	//this property listens for the keydown event, controls calls the controll argument 
 	//which is set by passing an object through it with up & down being a key for that object
 		document.addEventListener('keydown', event => {
