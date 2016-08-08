@@ -17,7 +17,7 @@ import { gap, p1Keys, p2Keys, start} from './Settings';
 		this.ctx.fillStyle = 'white';
 		//game objects
 		this.board = new Board(this.width, this.height);
-		this.player1 = new Paddle(this.height, gap, p1Keys);  //{up: a, down: z,}
+		this.player1 = new Paddle(this.height, gap, p1Keys);
 		this.player2 = new Paddle(this.height, this.width - 5 - gap, p2Keys);
 		this.ball1 = new Ball(this.height, this.width, start, this);
 		this.leftScore = new ScoreBoard(this.width/4 + 20,  30, 0);

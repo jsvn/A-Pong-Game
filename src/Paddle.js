@@ -24,9 +24,8 @@ export default class Paddle {
 		});	
 	}
 	//this draws the paddle and renders it.
-	// Maybe split up the fillRect into it's own draw method to be rendered in the render()
 	render(ctx){
-		ctx.fillStyle = 'rose';
+		ctx.fillStyle = 'pink';
 		ctx.fillRect(
 			this.x, this.y, 
 			this.width, this.height

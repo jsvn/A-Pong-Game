@@ -10,7 +10,7 @@ export default class Ball {
 		this.maxHeight = height;
 		this.height = height;
 		this.width = width;
-		// this.speed = speed;
+		// this.speed = speed; <- can use later for new balls!
 		this.radius = radius;
 		this.game = game;
 		this.startListener(controls);
@@ -25,13 +25,15 @@ export default class Ball {
 		ctx.fillStyle = "white";
 		ctx.fill();
 	}
-	
+	//this sets the starting velocities after the space key is pressed
+	// space key value can be found in settings!
 	startListener(controls){
 		document.addEventListener('keydown', event => {
 			if (this.vx === 0 && this.vy === 0 && event.keyCode === controls.start){
 				const generateSpeed = () => {
 					this.vy = Math.floor(Math.random() * 8 - 4);
 					this.vx = Math.floor(Math.random() * 8 - 4);	
+					//stops x & y from being at 0
 					if (this.vx === 0 || this.vy === 0 ) {
 						generateSpeed();
 					}
@@ -44,13 +46,12 @@ export default class Ball {
 	wallBounce(){
 		const hitTop = this.y + this.radius < 5;
 		const hitBottom = this.y >= this.height - 5;
-		
+		//Change y direction when hits top and bottom
 		if (hitTop || hitBottom){
 			this.vy = -this.vy;
 			this.ballBounceSound.play();
 		}
 	}
-	
 	paddleCollision(player1, player2) {
 		if (this.vx > 0) {
 			const inRightEnd = 
@@ -84,15 +85,15 @@ export default class Ball {
 				}
 			}
 		}
-     } //Paddle Collision brackets
+     }
      goal(){
-     	const outRight = this.x >= this.width;
-     	const outLeft = this.x + this.radius <= 0;
+     	const outOnRight = this.x >= this.width;
+     	const outOnLeft = this.x + this.radius <= 0;
 
-     	if (outRight){
+     	if (outOnRight){
      		this.game.leftScore.score++;
      		this.reset();
-     	}else if(outLeft){
+     	}else if(outOnLeft){
      		this.game.rightScore.score++;
      		this.reset();
      	}
@@ -110,7 +111,7 @@ export default class Ball {
 			this.draw(ctx);
 			this.wallBounce();
 			this.paddleCollision(player1, player2);
-			this.goal(this.width, this.height);//, player1, player2);
+			this.goal(this.width, this.height);
 			
 		}
 	}
