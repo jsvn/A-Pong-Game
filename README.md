@@ -8,13 +8,17 @@ This is a working game of Pong:
 ###How to Play:
 ####Keys
 
-#####Player 1: | Player 2:
---- | ---
-a: up | * ▲ : up
-z: down | * ▼: down
+#####Player 1:
+* a: up 
+* z: down
+
+#####Player 2:
+* ▲ : up
+* ▼: down
 
 ##### Start
 * spacebar: start ball movement
+___
 
 ###Technology Used
 * HTML5 Canvas
