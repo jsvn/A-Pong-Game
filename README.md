@@ -22,3 +22,6 @@ The main game functionality required we needed two independent instances of our 
 I learned a lot from completing this project. It challenged my problem-solving abilities and also really opened up my eyes to how precisely you need to be when telling a computer what to do.  I would like to try and finish up some of the stretch goals for this project, as well as try my hand at creating other simple games with code. I feel like my knowledge with javascript is growing, and every passing day I am feeling more comfortable with using the language. 
 
 I have found through my first few projects here at RED that I really enjoy setting up the best dev environment that I can. I enjoy using/learning all the tools to utilize for being able to write more readable code on my end, while still producing files the browser can still read and render.
+
+P.S.
+- after working all weekend out of my localhost:8080 server, then checking monday morning at just opening my project from my index.html my game is broken outside of localhost:8080...
