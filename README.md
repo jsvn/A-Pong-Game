@@ -8,10 +8,10 @@ This is a working game of Pong:
 ###How to Play:
 ####Keys
 
-#####Player 1: | #####Player 2:
+#####Player 1: | Player 2:
 --- | ---
-* a: up | * ▲ : up
-* z: down | * ▼: down
+a: up | * ▲ : up
+z: down | * ▼: down
 
 ##### Start
 * spacebar: start ball movement
