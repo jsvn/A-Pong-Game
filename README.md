@@ -18,7 +18,7 @@ This is a working game of Pong:
 
 ##### Start
 * spacebar: start ball movement
-___
+-------------
 
 ###Technology Used
 * HTML5 Canvas
